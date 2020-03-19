@@ -11,9 +11,9 @@ std::tuple<std::vector<int>, int> brute_force::plan_generations(std::vector<int>
         std::vector<int> right; int left=0, total_size = 0, total_join = 0;
         int global_maxV;
         //the plan that is being evaluated
-//        for (int j = 0; j < n; j++)  {
-//            std::cout << arr[j] << " ";
-//        }
+        for (int j = 0; j < n; j++)  {
+            std::cout << arr[j] << " ";
+        }
         for (int r = 1 ; r <= n ; r++){
             left = arr[r-1];
             if(r == 1){
@@ -27,16 +27,20 @@ std::tuple<std::vector<int>, int> brute_force::plan_generations(std::vector<int>
             }else{
                 right.push_back((arr[r-2] -1));
                 join_cost_res = total_size;
-                size_join_res = size_join(right,left - 1,r, (total_size+total_join), table_statistic);
+                size_join_res = size_join(right,left - 1,r, 0, table_statistic);
             }
+            std::cout << " join -> " << size_join_res;
+            
             total_size = size_join_res;
             total_join += join_cost_res;
         }
+//        std::cout << " here is the current smaller result -> " << minimum_total_join;
         if (total_join <= minimum_total_join){
             minimum_total_join = total_join;
-            std::cout << "here is the smaller result -> " << total_join << std::endl;;
+            std::cout << " ;  here is the smaller result -> " << total_join << std::endl;
             path = arr;
         }
+        std::cout << std::endl;;
         return {path, minimum_total_join};
     }
     

@@ -38,9 +38,9 @@ int dynamic_programming::GetCombID(std::vector<int> comb, int n_sub){
 int dynamic_programming::calcAndMemoized(std::vector<int> right, int left) {
     for(auto& element : right)
         element += 1;
-    for (int i = 0 ; i < right.size() ; i++){
-        std::cout << " "<< right[i] ;
-    }std::cout << " //";
+//    for (int i = 0 ; i < right.size() ; i++){
+//        std::cout << " "<< right[i] ;
+//    }std::cout << " //";
     int mem_idx = (GetCombID(right,4)-1);
 //    std::cout << "PRINT MEM ID "<< mem_idx << " ;; ";
     int right_size = right.size();
@@ -105,9 +105,9 @@ int dynamic_programming::construct_memoTable(std::vector<int> arr, int n, int r,
 
 void dynamic_programming::combinationUtil(std::vector<int> arr, std::vector<int> data,  int start, int end,  int index, int r, int& idx_hash) {
     if (index == r)  {
-        for (int j = 0; j < r; j++)  {
-            std::cout << data[j] << " ";
-        }std::cout << ";" << std::endl;
+//        for (int j = 0; j < r; j++)  {
+//            std::cout << data[j] << " ";
+//        }std::cout << ";" << std::endl;
         if(end>=r || r == end+1){
             idx_hash = construct_memoTable(data,end,r, idx_hash); // if the last combination doesnt need this, separate if without this line
         }
@@ -140,9 +140,7 @@ std::tuple<std::vector<int>, int> dynamic_programming::getPlan_dynamicProgrammin
         int idx_hash = 1;
         combinationUtil(arr, data, 0, n-1, 0, r, idx_hash);
         vect.push_back(list_);
-        std::cout << "END"<<std::endl;
-        print_memo_table(r);
-        std::cout << "END"<<std::endl;
+//        print_memo_table(r);
         list_.clear();
     }
     
@@ -150,8 +148,8 @@ std::tuple<std::vector<int>, int> dynamic_programming::getPlan_dynamicProgrammin
     int memid=0,total=0;
     for(int i = n-1 ; i > 0 ; i--){
         std::list<TABLE_MEMO>::iterator x = std::next(vect[i].begin(), memid);
-        memid = (GetCombID(x->best_rel,n)-1);
-        std::cout << "at level "<<i<<" : "<< memid << ";";
+//        memid = (GetCombID(x->best_rel,n)-1);
+//        std::cout << "at level "<<i<<" : "<< memid << ";";
         total += x->cost_join;
     }
 

@@ -6,6 +6,7 @@
 #include <list>
 #include <numeric>
 #include <tuple>
+#include <chrono>
 #include "incl/stats.h"
 #include "incl/brute_force.h"
 #include "incl/greedy.hpp"
@@ -18,10 +19,10 @@
 std::vector<TABLE> table_statistic; //definition
 
 void initialize(){
-    table_statistic.push_back({'R', 1000, {100,200,-1,-1}});
-    table_statistic.push_back({'S', 1000, {-1,100,500,-1}});
-    table_statistic.push_back({'T', 1000, {-1,-1,20,50}});
-    table_statistic.push_back({'U', 1000, {50,-1,-1,1000}});
+        table_statistic.push_back({'R', 1000, {100,200,-1,-1}});
+        table_statistic.push_back({'S', 1000, {-1,100,500,-1}});
+        table_statistic.push_back({'T', 1000, {-1,-1,20,50}});
+        table_statistic.push_back({'U', 1000, {50,-1,-1,1000}});
 }
 
 std::vector<TABLE> get_table_stats(int n){
@@ -43,51 +44,71 @@ int main(){
     
     std::cout << "calculating ..";
     
-    
 //    std::cout << std::endl << " .. Brute Force .." << std::endl ;
+//    auto start = std::chrono::high_resolution_clock::now();
 //    brute_force BF(arr, N_rel, table_statistic);
+//    auto finish = std::chrono::high_resolution_clock::now();
 //    minimum_total_join = 0;
 //    std::tie(path, minimum_total_join) = BF.getPlan_bruteForce();
 //    std::cout << "RESULT FROM BRUTE FORCE" << std::endl;
 //    for(int i = 0 ; i < path.size() ; i++)
 //        std::cout << path[i];
-//    std::cout << std::endl << minimum_total_join <<std::endl;
-//
-//    std::cout << std::endl << " .. Greedy .." << std::endl ;
-//    greedy greedy(arr, N_rel, table_statistic);
-//    minimum_total_join = 0;
-//    std::tie(path, minimum_total_join) = greedy.getPlan_greedy();
-//    std::cout << "RESULT GREEDY" << std::endl;
-//    for(int i = 0 ; i < path.size() ; i++)
-//        std::cout << path[i];
-//    std::cout << std::endl << minimum_total_join <<std::endl;
-//    
+//    std::cout << " -> " << minimum_total_join <<std::endl;
+//    std::cout << "time taken -> "<< std::chrono::duration_cast<std::chrono::microseconds>( finish - start ).count() << "ms" << std::endl;
+
 //    std::cout << std::endl << " .. Dynamic Programming .." << std::endl ;
+//    auto start = std::chrono::high_resolution_clock::now();
 //    dynamic_programming DP(arr, N_rel, table_statistic);
+//    auto finish = std::chrono::high_resolution_clock::now();
 //    minimum_total_join = 0;
 //    std::tie(path, minimum_total_join) = DP.getPlan_dynamicProgramming();
 //    std::cout << "RESULT DP" << std::endl;
 //    for(int i = 0 ; i < path.size() ; i++)
 //        std::cout << path[i];
-//    std::cout << std::endl << minimum_total_join <<std::endl;
+//    std::cout << " -> " << minimum_total_join <<std::endl;
+//    std::cout << "time taken -> "<< std::chrono::duration_cast<std::chrono::microseconds>( finish - start ).count() << "ms" << std::endl;
+//
+//    std::cout << std::endl << " .. Greedy .." << std::endl ;
+//    auto start = std::chrono::high_resolution_clock::now();
+//    greedy greedy(arr, N_rel, table_statistic);
+//    auto finish = std::chrono::high_resolution_clock::now();
+//    minimum_total_join = 0;
+//    std::tie(path, minimum_total_join) = greedy.getPlan_greedy();
+//    std::cout << "RESULT GREEDY" << std::endl;
+//    for(int i = 0 ; i < path.size() ; i++)
+//        std::cout << path[i];
+//    std::cout << " -> " << minimum_total_join <<std::endl;
+//    std::cout << "time taken -> "<< std::chrono::duration_cast<std::chrono::microseconds>( finish - start ).count() << "ms" << std::endl;
+
 //
 //    std::cout << std::endl << " .. Genetic Algorithm .." << std::endl ;
-//    genetic_algorithm GA(arr, N_rel, table_statistic, 3);
+//    auto start = std::chrono::high_resolution_clock::now();
+//    genetic_algorithm GA(arr, N_rel, table_statistic, 10);
+//    auto finish = std::chrono::high_resolution_clock::now();
 //    minimum_total_join = 0;
 //    std::tie(path, minimum_total_join) = GA.getPlan_geneticAlgorithm();
 //    std::cout << "RESULT GA" << std::endl;
 //    for(int i = 0 ; i < path.size() ; i++)
 //        std::cout << path[i];
 //    std::cout << std::endl << minimum_total_join <<std::endl;
+//        std::cout << "time taken -> "<< std::chrono::duration_cast<std::chrono::microseconds>( finish - start ).count() << "ms" << std::endl;
+
     
     std::cout << std::endl << " .. Simulated Annealing .." << std::endl ;
+    auto start = std::chrono::high_resolution_clock::now();
     simulated_annealing SA(arr, N_rel, table_statistic);
+    auto finish = std::chrono::high_resolution_clock::now();
     minimum_total_join = 0;
     std::tie(path, minimum_total_join) = SA.getPlan_simulatedAnnealing();
     std::cout << "RESULT SA" << std::endl;
     for(int i = 0 ; i < path.size() ; i++)
         std::cout << path[i];
     std::cout << std::endl << minimum_total_join <<std::endl;
-    
+    std::cout << "time taken -> "<< std::chrono::duration_cast<std::chrono::microseconds>( finish - start ).count() << "ms" << std::endl;
     return 0;
+    
+//-------------------time taken;
+//    std::chrono::duration<double> elapsed = finish - start;
+//    std::cout << "f() took " << double(finish - start) / double(CLOCKS_PER_SEC) << " ms "<< std::endl;
+//    return 0;
 }

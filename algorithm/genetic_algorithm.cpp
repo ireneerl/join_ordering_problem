@@ -59,7 +59,7 @@ void genetic_algorithm::fitness_function(int N_indv, int n){
         population[x_indv].size = temp_total_size;
         population[x_indv].fitness_val = 1.0/temp_total_join;
     }
-    std::cout << std::endl;
+//    std::cout << std::endl;
     // return {total_size, total_join};
 }
 
@@ -141,7 +141,7 @@ std::tuple<std::vector<int>, int> genetic_algorithm::getPlan_geneticAlgorithm(){
     generate_population(arr, n, NIndiv);
     for(int i = 0 ; i < Nevolution ; i ++ ){
         fitness_function(NIndiv, n);
-        printPopulation(population);
+//        printPopulation(population);
         select_parents(NIndiv, n);
 //        printPopulation(parents);
         crossOver(0.6, NIndiv);
@@ -156,6 +156,6 @@ std::tuple<std::vector<int>, int> genetic_algorithm::getPlan_geneticAlgorithm(){
     std::sort(population.begin(), population.end(), [&](const INDVI a, const INDVI b){
         return a.fitness_val > b.fitness_val;
     });
-    printPopulation(population);
+//    printPopulation(population);
     return {population[0].gens,population[0].cost};
 }

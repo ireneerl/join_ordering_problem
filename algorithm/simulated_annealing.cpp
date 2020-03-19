@@ -65,17 +65,16 @@ std::tuple<std::vector<int>, int> simulated_annealing::annealing_process(std::ve
     for(int i = 0; i < 5 ; i++){
         minimum_join_cost = join_cost_function(arr, Nrel);
         new_rel_path = new_solution(arr, Nrel);
-        std::cout << "state i -> ";
-        for(int x = 0 ; x < Nrel; x++ ){
-            std::cout <<  arr[x] << " ";
-        }std::cout << " ; ";
-        std::cout << "state i + 1 -> ";
-        for(int x = 0 ; x < Nrel; x++ ){
-            std::cout <<  new_rel_path[x] << " ";
-        }
+//        std::cout << "state i -> ";
+//        for(int x = 0 ; x < Nrel; x++ ){
+//            std::cout <<  arr[x] << " ";
+//        }std::cout << " ; ";
+//        std::cout << "state i + 1 -> ";
+//        for(int x = 0 ; x < Nrel; x++ ){
+//            std::cout <<  new_rel_path[x] << " ";
+//        }
         new_join_size = join_cost_function(new_rel_path, Nrel);
-        
-        std::cout << "energy i -> " << minimum_join_cost << "; new energy -> " << new_join_size;
+//        std::cout << "energy i -> " << minimum_join_cost << "; new energy -> " << new_join_size;
         if(new_join_size < minimum_join_cost){
             minimum_join_cost = new_join_size;
             arr = new_rel_path;
@@ -88,12 +87,12 @@ std::tuple<std::vector<int>, int> simulated_annealing::annealing_process(std::ve
             float temp_cooling = exp(-1 * (new_join_size - smallest_join_cost) / T);
             // std::cout << "random number and its exponential border : " << rndNumber << " & " << temp_cooling;
             if(rndNumber < temp_cooling){
-                std::cout << " ** "; //it is not smaller join cost but exploring the area for possible global minima
+//                std::cout << " ** "; //it is not smaller join cost but exploring the area for possible global minima
                 arr = new_rel_path;
             }//else ; maintain arr;
         }
         T = decT * T;
-        std::cout << std::endl;
+//        std::cout << std::endl;
     }
     return{arr, smallest_join_cost};
 }
